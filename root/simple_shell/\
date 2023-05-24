@@ -1,0 +1,46 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <string.h>
+
+#define BUFFER_SIZE 2024
+#define TOKEN_DELIMITERS "\t\r\n\a"
+
+int main(void)
+{
+    char input[BUFFER_SIZE];
+    pid_t pid;
+
+    while (1) {
+        printf("$ "); /* Print the shell prompt */
+        fgets(input, BUFFER_SIZE, stdin); /* Read user input */
+
+        /* Remove the trailing newline character */
+        input[strcspn(input, "\n")] = '\0';
+
+        /* Exit the shell if the user enters "exit" */
+        if (strcmp(input, "exit") == 0)
+            break;
+
+        pid = fork(); /* Create a child process */
+
+        if (pid == -1) {
+            perror("fork");
+            exit(EXIT_FAILURE);
+        } else if (pid == 0) {
+            /* Child process */
+		execvp("/bin/sh", (char *[])["/bin/sh", "-c", input, NULL]);
+
+            /* execvp returns only if an error occurs */
+            perror("execvp");
+            exit(EXIT_FAILURE);
+        } else {
+            /* Parent process */
+            wait(NULL);
+        }
+    }
+
+    return 0;
+}

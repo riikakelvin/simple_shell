@@ -1,16 +1,52 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <unistd.h>
+#include <sys/types.h>
 #include <sys/wait.h>
+#include <string.h>
 
-#define BUFFER_SIZE 1024
+#define BUFFER_SIZE 2024
+#define TOKEN_DELIMITERS " "
 
-int main()
+int main(void)
 {
-	char userInput[BUFFER_SIZE];
 	char *cmmd;
 	char *argm;
+	char *userInput;
+	char input[BUFFER_SIZE];
+	pid_t pid;
+
+	while (1)
+	{
+		printf("$ ");
+		fgets(input, BUFFER_SIZE, stdin);
+
+		input[strcspn(input, "\n")] = '\0';
+
+		if (strcmp(input, "exit") == 0)
+			break;
+
+		pid = fork();
+
+		if (pid == -1)
+		{
+			perror("fork");
+			exit(EXIT_FAILURE);
+		}
+		else if (pid == 0)
+		{
+			execlp("/bin/sh", "/bin/sh", "-c", input, NULL);
+
+			perror("execvp");
+			exit(EXIT_FAILURE);
+		}
+		else
+		{
+			wait(NULL);
+		}
+	}
+
+	return (0);
 
 	while (1)
 	{
@@ -33,7 +69,7 @@ int main()
 				{
 					if (chdir(argm) != 0)
 					{
-						printf("Error: failed to change directory\n");
+					printf("Error: failed to change directory\n");
 					}
 					else
 					{
@@ -43,6 +79,7 @@ int main()
 				else
 				{
 					int pid = fork();
+
 					if (pid == 0)
 					{
 						execvp(cmmd, &cmmd);
