@@ -17,7 +17,7 @@ int is_chain(info_t *info, char *buff, size_t *p)
 		k++;
 		info->cmd_buff_type = CMD_OR;
 	}
-	else if (buff[k] == '&' && buf[k + 1] == '&')
+	else if (buff[k] == '&' && buff[k + 1] == '&')
 	{
 		buff[k] = 0;
 		k++;

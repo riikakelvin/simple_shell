@@ -20,14 +20,14 @@ char *_strncpy(char *dest, char *src, int n)
 	}
 	if (j < n)
 	{
-		k = i;
+		k = j;
 		while (k < n)
 		{
 			dest[k] = '\0';
 			k++;
 		}
 	}
-	return (str);
+	return (s);
 }
 
 /**

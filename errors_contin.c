@@ -128,7 +128,7 @@ void remove_comments(char *buff)
 	int j;
 
 	for (j = 0; buff[j] != '\0'; j++)
-		if (buff[j] == '#' && (!j || buf[j - 1] == ' '))
+		if (buff[j] == '#' && (!j || buff[j - 1] == ' '))
 		{
 			buff[j] = '\0';
 			break;

@@ -5,7 +5,6 @@
  * main - program's entry point
  * @ac: number of arguements
  * @av: array of strings, NULL Terminated
- *
  * Return: 0 upon success, 1 incase of failure
  */
 int main(int ac, char **av)
@@ -31,7 +30,7 @@ int main(int ac, char **av)
 				_eputs(": 0: Unable to Open ");
 				_eputs(av[1]);
 				_eputchar('\n');
-				_eputchar(BUF_FLUSH);
+				_eputchar(BUFF_FLUSH);
 				exit(127);
 			}
 			return (EXIT_FAILURE);

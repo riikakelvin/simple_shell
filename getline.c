@@ -31,7 +31,7 @@ ssize_t input_buff(info_t *info, char **buff, size_t *len)
 			}
 			info->linecount_flag = 1;
 			remove_comments(*buff);
-			build_history_list(info, *buf, info->histcount++);
+			build_history_list(info, *buff, info->histcount++);
 			{
 				*len = r;
 				info->cmd_buff = buff;
@@ -98,7 +98,7 @@ ssize_t read_buff(info_t *info, char *buff, size_t *i)
 
 	if (*i)
 		return (0);
-	r = read(info->readfd, buff, READ_BUFF_SIZE);
+	r = read(info->readfd, buff, R_BUFF_SIZE);
 	if (r >= 0)
 		*i = r;
 	return (r);
@@ -113,7 +113,7 @@ ssize_t read_buff(info_t *info, char *buff, size_t *i)
  */
 int _getline(info_t *info, char **ptr, size_t *length)
 {
-	static char buff[READ_BUFF_SIZE];
+	static char buff[R_BUFF_SIZE];
 	static size_t i, len;
 	size_t k;
 	ssize_t r = 0, s = 0;
@@ -136,9 +136,9 @@ int _getline(info_t *info, char **ptr, size_t *length)
 		return (p ? free(p), -1 : -1);
 
 	if (s)
-		_strncat(new_p, buf + i, k - i);
+		_strncat(new_p, buff + i, k - i);
 	else
-		_strncpy(new_p, buf + i, k - i + 1);
+		_strncpy(new_p, buff + i, k - i + 1);
 
 	s += k - i;
 	i = k;
@@ -159,5 +159,5 @@ void sigintHandler(__attribute__((unused))int sig_num)
 {
 	_puts("\n");
 	_puts("$  ");
-	_putchar(BUF_FLUSH);
+	_putchar(BUFF_FLUSH);
 }

@@ -17,7 +17,7 @@
 #define WR_BUFF_SIZE 1024
 #define BUFF_FLUSH -1
 
-#define MAX _HIST       4096
+#define MAX_HIST       4096
 #define HIST_FILE	".simple_shell_hist"
 
 /*WHEN USING GETLINE FUCNTION CALL*/
@@ -30,6 +30,8 @@
 #define CMD_AND		2
 #define CMD_CHAIN	3
 
+#define CONVERT_LOWERCASE	1
+#define CONVERT_UNSIGNED	2	
 extern char **environ;
 
 
@@ -105,7 +107,7 @@ typedef struct builtin
 	int (*func)(info_t *);
 } builtin_table;
 
-
+int main(int ac, char **av);
 char *dup_chars(char *, int, int);
 char *find_path(info_t *, char *, char *);
 int is_cmd(info_t *, char *);
@@ -115,8 +117,8 @@ void find_cmd(info_t *);
 void fork_cmd(info_t *);
 void _eputs(char *);
 int _eputchar(char);
-int _putsfd(char *str, int fd);
-int _putfd(char c, int fd);
+int _putsfd(char *str, int file_d);
+int _putfd(char c, int file_d);
 int _putchar(char);
 int _strlen(char *);
 int _strcmp(char *, char *);
@@ -202,9 +204,6 @@ int replace_vars(info_t *);
 
 void print_first_prompt(char*av, char **env);
 pid_t fork(void);
-int main(int ac, char **av, char **env);
-int main(void);
-int main(int ac, char **av);
 
 
 #endif

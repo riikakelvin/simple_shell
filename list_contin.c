@@ -22,14 +22,14 @@ char **list_to_strings(list_t *head)
 		str = malloc(_strlen(node->str) + 1);
 		if (!str)
 		{
-			for (k = 0; k < i; k++)
+			for (k = 0; k < j; k++)
 				free(strs[k]);
 			free(strs);
 			return (NULL);
 		}
 
 		str = _strcpy(str, node->str);
-		strs[i] = str;
+		strs[j] = str;
 	}
 	strs[j] = NULL;
 	return (strs);

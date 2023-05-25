@@ -1,5 +1,4 @@
 #include "shell.h"
-
 /**
  * find_builtin - find builtin commands
  * @info: the parameter & return info struct
@@ -14,7 +13,7 @@ int find_builtin(info_t *info)
 
 	builtin_table builtintbl[] = {
 		{"setenv", _mysetenv},
-		{"unsetenv", _myunsetenv},
+		{"unsetenv", _unsetenv},
 		{"exit", _myexit},
 		{"alias", _myalias},
 		{"env", _myenv},

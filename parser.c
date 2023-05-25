@@ -9,7 +9,7 @@
  */
 char *dup_chars(char *pathstr, int start, int stop)
 {
-	static char buf[1024];
+	static char buff[1024];
 	int j = 0, l = 0;
 
 	for (l = 0, j = start; j < stop; j++)

@@ -154,7 +154,7 @@ size_t list_len(const list_t *h)
 /**
  * free_list - frees all listed nodes
  * @head_ptr: pointer address to the head nod
- * Return: 0
+ * Return: void
  */
 void free_list(list_t **head_ptr)
 {
@@ -172,4 +172,5 @@ void free_list(list_t **head_ptr)
 		node = next_node;
 	}
 	*head_ptr = NULL;
+}
 }

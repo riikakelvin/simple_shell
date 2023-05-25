@@ -26,9 +26,9 @@ void _eputs(char *str)
 int _eputchar(char c)
 {
 	static int j;
-	static char buff[WRITE_BUFF_SIZE];
+	static char buff[WR_BUFF_SIZE];
 
-	if (c == BUFF_FLUSH || j >= WRITE_BUFF_SIZE)
+	if (c == BUFF_FLUSH || j >= WR_BUFF_SIZE)
 	{
 		write(2, buff, j);
 		j = 0;
@@ -47,9 +47,9 @@ int _eputchar(char c)
 int _putfd(char c, int file_d)
 {
 	static int j;
-	static char buff[WRITE_BUFF_SIZE];
+	static char buff[WR_BUFF_SIZE];
 
-	if (c == BUFF_FLUSH || j >= WRITE_BUFF_SIZE)
+	if (c == BUFF_FLUSH || j >= WR_BUFF_SIZE)
 	{
 		write(file_d, buff, j);
 		j = 0;
@@ -65,7 +65,7 @@ int _putfd(char c, int file_d)
  * @fd: the file descriptor to write to (destination)
  * Return: total characters put
  */
-int _putsfd(char *str, int fd)
+int _putsfd(char *str, int file_d)
 {
 	int j = 0;
 
