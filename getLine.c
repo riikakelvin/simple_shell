@@ -1,19 +1,21 @@
 #include "shell.h"
 
 /**
- * input_buf - puts to buffer chained commands
+ * input_buf - buffers chained commands
  * @info: parameter struct
- * @buffer: buffer address
- * @len: address of len variable
- * Return: number of bytes read
+ * @buffer: address of buffer
+ * @len: address of len var
+ *
+ * Return: bytes read
  */
 ssize_t input_buf(info_t *info, char **buffer, size_t *len)
 {
 	ssize_t r = 0;
 	size_t len_p = 0;
 
-	if (!*len)
+	if (!*len) /* if nothing left in the buffer, fill it */
 	{
+		/*bfree((void **)info->cmd_buf);*/
 		free(*buffer);
 		*buffer = NULL;
 		signal(SIGINT, sigintHandler);
@@ -64,17 +66,17 @@ ssize_t get_input(info_t *info)
 		o = buf + t;
 
 		check_chain(info, buf, &k, t, len);
-		while (k < len)
+		while (k < len) /* iterate to semicolon or end */
 		{
 			if (is_chain(info, buf, &k))
 				break;
 			k++;
 		}
 
-		t = k + 1;
-		if (t >= len)
+		t = k + 1; /* increment past nulled ';'' */
+		if (t >= len) /* reached end of buffer? */
 		{
-			t = len = 0;
+			t = len = 0; /* reset position and length */
 			info->cmd_buf_type = CMD_NORM;
 		}
 
@@ -82,8 +84,8 @@ ssize_t get_input(info_t *info)
 		return (_strlen(o));
 	}
 
-	*buf_p = buf;
-	return (r);
+	*buf_p = buf; /* else not a chain, pass back buffer from _getline() */
+	return (r); /* return length of buffer from _getline() */
 }
 
 /**
