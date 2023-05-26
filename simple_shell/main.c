@@ -11,16 +11,8 @@
 
 int main(int ac, char **av)
 {
-<<<<<<< HEAD
 	info_t info[] = { INFO_INIT };
 	int fd = 2;
-=======
-	info_t info[] = { INFO_INIT
-				{1, 2, 3}
-				{4 5, 6}
-			};
-	int file_d = 2;
->>>>>>> 3426df6989c946646847b93996505d8860ce5f88
 
 	asm ("mov %1, %0\n\t"
 			"add $3, %0"
