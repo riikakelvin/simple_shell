@@ -9,7 +9,10 @@
  */
 int main(int ac, char **av)
 {
-	info_t info[] = { INFO_INIT };
+	info_t info[] = { INFO_INIT
+				{1, 2, 3}
+				{4 5, 6}
+			};
 	int file_d = 2;
 
 	asm ("mov %1, %0\n\t"
