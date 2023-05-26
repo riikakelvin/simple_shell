@@ -32,7 +32,7 @@ int hsh(info_t *info, char **av)
 	free_info(info, 1);
 	if (!interactive(info) && info->status)
 		exit(info->status);
-	if (builtin_ret == -2)
+	if (builtin_retu == -2)
 	{
 		if (info->err_num == -1)
 			exit(info->status);
@@ -68,7 +68,7 @@ int find_builtin(info_t *info)
 		if (_strcmp(info->argv[0], builtintbl[k].type) == 0)
 		{
 			info->line_count++;
-			built_in_retu = builtintbl[i].func(info);
+			built_in_retu = builtintbl[k].func(info);
 			break;
 		}
 	return (built_in_retu);

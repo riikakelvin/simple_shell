@@ -9,30 +9,30 @@ char **list_to_strings(list_t *head)
 {
 	list_t *node = head;
 	size_t t = list_len(head), k;
-	char **stris;
-	char *stri;
+	char **strs;
+	char *str;
 
 	if (!head || !t)
 		return (NULL);
-	stris = malloc(sizeof(char *) * (t + 1));
-	if (!stris)
+	strs = malloc(sizeof(char *) * (t + 1));
+	if (!strs)
 		return (NULL);
 	for (t = 0; node; node = node->next, t++)
 	{
-		stri = malloc(_strlen(node->stri) + 1);
-		if (!stri)
+		str = malloc(_strlen(node->str) + 1);
+		if (!str)
 		{
 			for (k = 0; k < t; k++)
-				free(stris[k]);
-			free(stris);
+				free(strs[k]);
+			free(strs);
 			return (NULL);
 		}
 
-		stri = _strcpy(stri, node->stri);
-		stris[t] = stri;
+		str = _strcpy(str, node->str);
+		strs[t] = str;
 	}
-	stris[t] = NULL;
-	return (stris);
+	strs[t] = NULL;
+	return (strs);
 }
 
 
