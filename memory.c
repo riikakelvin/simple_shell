@@ -1,9 +1,9 @@
 #include "shell.h"
 
 /**
- * bfree - frees pointers and anulls their address
- * @ptr: pointer address to be freed
- * Return: 1 successfully freed, otherwise 0.
+ * bfree - frees pointers & anulls the address
+ * @ptr: pointer address to free
+ * Return: 1 on successully freed, otherwise 0.
  */
 int bfree(void **ptr)
 {
@@ -15,3 +15,4 @@ int bfree(void **ptr)
 	}
 	return (0);
 }
+
